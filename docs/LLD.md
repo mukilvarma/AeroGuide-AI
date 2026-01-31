@@ -1,9 +1,3 @@
-
----
-
-## ✅ `docs/HLD.md` (High Level Design)
-
-```md
 # HLD — AeroGuide AI
 ## Multilingual, Voice-First AI Transit Assistant for Airports
 
