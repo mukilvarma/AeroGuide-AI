@@ -78,19 +78,20 @@ A vector database enables:
 
 ```mermaid
 flowchart TB
-  App[Mobile App / PWA] --> API[API Gateway]
+  App[Mobile App or PWA] --> API[API Gateway]
 
   API --> Ctx[Trip Context Service]
   API --> Chat[Chat Orchestrator]
   API --> Rec[Recommendation Service]
 
-  Chat --> STT[Speech-to-Text]
-  Chat --> LLM[LLM Provider\nOpenAI/Gemini]
+  Chat --> STT[Speech to Text]
+  Chat --> LLM[LLM Provider OpenAI Gemini]
   Chat --> Lang[Language Service]
-  Chat --> Trans[Translation Adapter\n(optional)]
+  Chat --> Trans[Translation Adapter Optional]
 
-  Rec --> POI[POI Provider Adapter\nGoogle/HERE/OSM]
-  Rec --> Route[Routing Adapter\nGoogle Routes]
-  Rec --> DB[(Postgres)]
-  Rec --> VDB[(Vector DB)]
-  Rec --> Cache[(Redis Cache)]
+  Rec --> POI[POI Provider Adapter]
+  Rec --> Route[Routing Adapter]
+  Rec --> DB[Postgres Database]
+  Rec --> VDB[Vector Database]
+  Rec --> Cache[Redis Cache]
+
