@@ -4,7 +4,6 @@
 
 > This LLD expands the HLD into implementable modules, APIs, data models, flows, and GitHub-safe Mermaid diagrams.
 
----
 
 ## 1) MVP Scope
 
