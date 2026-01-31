@@ -325,32 +325,44 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
-  participant App
-  participant Chat
-  participant STT
-  participant Lang
-  participant Ret
-  participant VDB
-  participant Rec
-  participant Tool
-  participant LLM
+  participant App as Client Application
+  participant Chat as Chat Orchestrator
+  participant STT as Speech To Text Service
+  participant Lang as Language Resolution Service
+  participant Ret as Retrieval Service for RAG
+  participant VDB as Vector Database
+  participant Rec as Recommendation Service
+  participant Tool as External Tools Services
+  participant LLM as Large Language Model Provider
 
-  App->>Chat: Voice or text input
-  Chat->>STT: Transcribe if voice
-  STT-->>Chat: Text and language
-  Chat->>Lang: Resolve language
+  App->>Chat: Voice or text input with session identifier
+
+  alt Voice input
+    Chat->>STT: Transcribe audio and detect language
+    STT-->>Chat: Text transcript and detected language
+  end
+
+  Chat->>Lang: Resolve preferred response language
   Lang-->>Chat: Preferred language
-  Chat->>Ret: Retrieve context
-  Ret->>VDB: Similarity search
-  VDB-->>Ret: Context
-  Ret-->>Chat: Context
-  Chat->>Rec: Rank options
-  Rec->>Tool: Fetch ETA if needed
-  Tool-->>Rec: ETA data
-  Rec-->>Chat: Ranked results
-  Chat->>LLM: Compose response
-  LLM-->>Chat: Final reply
-  Chat-->>App: Response
+
+  Chat->>Ret: Retrieve relevant airport knowledge
+  Ret->>VDB: Semantic similarity search
+  VDB-->>Ret: Top relevant knowledge chunks
+  Ret-->>Chat: Retrieved context and confidence scores
+
+  alt Low confidence or missing data
+    Chat->>Rec: Request live recommendations
+    Rec->>Tool: Fetch live POI or routing data
+    Tool-->>Rec: Live results
+    Rec-->>Chat: Ranked recommendations
+  else High confidence
+    Chat->>Rec: Rank using retrieved knowledge
+    Rec-->>Chat: Ranked recommendations
+  end
+
+  Chat->>LLM: Generate grounded response in preferred language
+  LLM-->>Chat: Final response text
+  Chat-->>App: Response to user
 ```
 
 ---
