@@ -1,8 +1,6 @@
 # AeroGuide AI
 ## Multilingual, Voice-First AI Transit Assistant for Airports
 
----
-
 ## 1. Problem Statement
 
 Modern international airports are complex transit hubs where passengers frequently struggle to find relevant services within limited time windows.
